@@ -8,7 +8,7 @@ Criterios de aceptación
     El neto es el resultado de aplicar al bruto el correspondiente impuesto. Si algún neto no está bien calculado la línea se queda fuera.
     */
 
-import { invoiceCsvFilter } from "../../../tests/kata/filtro-csv/invoiceCsvFilter";
+import { invoiceCsvFilter } from "../../../core/kata/filtro-csv/invoiceCsvFilter";
 
 /*
 Listado de pruebas
