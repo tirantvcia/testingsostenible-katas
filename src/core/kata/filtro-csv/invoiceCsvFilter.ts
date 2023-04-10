@@ -1,4 +1,4 @@
-export function invoiceCsvFilter(invoiceLines: string[]) {
+export function invoiceCsvFilter(invoiceLines: ReadonlyArray<string>) {
 
     if (invoiceLines.length === 0 || invoiceLines.length === 1) {
         return [];
@@ -12,11 +12,13 @@ export function invoiceCsvFilter(invoiceLines: string[]) {
 
 }
 
-function filterIncorrectLines(lines: string[]) {
-    let validInvoiceLines = [lines[0]];
+function filterIncorrectLines(readonlyInvoiceLines: ReadonlyArray<string>) {
+    let validInvoiceLines = [readonlyInvoiceLines[0]];
 
-    lines.splice(0, 1);
-    lines.filter(l => isInvoiceLineValid(l)).forEach(l => validInvoiceLines.push(l));
+    let copyInvoiceLines = [...readonlyInvoiceLines]; // create a copy of the readonly array
+
+    copyInvoiceLines.splice(0, 1);
+    copyInvoiceLines.filter(l => isInvoiceLineValid(l)).forEach(l => validInvoiceLines.push(l));
     return validInvoiceLines;
 }
 

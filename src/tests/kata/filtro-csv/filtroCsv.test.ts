@@ -24,13 +24,16 @@ describe("CSV Filter", () => {
     it("fichero con una sola factura con iva indicado donde todo es correcto, debería producir como salida la misma línea", () => {
         const header = 'Num_factura, Fecha, Bruto, Neto, IVA, IGIC, Concepto, CIF_cliente, NIF_cliente';
         const invoiceLine = '1,02/05/2021,1000,790,21,,ACER Laptop,B76430134,';
-        const csvFilter = invoiceCsvFilter([header, invoiceLine]);
+        const sourceLines: ReadonlyArray<string> = [header, invoiceLine];
+        const csvFilter = invoiceCsvFilter(sourceLines);
         expect(csvFilter).toEqual([header, invoiceLine]);
     });
+
     it("fichero con una sola factura con igic indicado donde todo es correcto, debería producir como salida la misma línea", () => {
         const header = 'Num_factura, Fecha, Bruto, Neto, IVA, IGIC, Concepto, CIF_cliente, NIF_cliente';
         const invoiceLine = '1,02/05/2021,1000,790,,21,ACER Laptop,B76430134,';
-        const csvFilter = invoiceCsvFilter([header, invoiceLine]);
+        const sourceLines: ReadonlyArray<string> = [header, invoiceLine];
+        const csvFilter = invoiceCsvFilter(sourceLines);
         expect(csvFilter).toEqual([header, invoiceLine]);
     });
     it("Un fichero vacio, devolvera un fichero vacio", () => {
@@ -42,22 +45,26 @@ describe("CSV Filter", () => {
     it("Un fichero de una sola línea es incorrecto porque no tiene cabecera", () => {
         // const header = '';
         const invoiceLine = '1,02/05/2021,1000,790,21,,ACER Laptop,B76430134,';
-        const csvFilter = invoiceCsvFilter([invoiceLine]);
+        const sourceLines: ReadonlyArray<string> = [invoiceLine];
+        const csvFilter = invoiceCsvFilter(sourceLines);
         expect(csvFilter).toEqual([]);
     });
     it('Un fichero con una sola factura donde IVA e IGIC están rellenos, debería eliminar la línea', () => {
         const header = 'Num_factura, Fecha, Bruto, Neto, IVA, IGIC, Concepto, CIF_cliente, NIF_cliente';
         const invoiceLine = '1,02/05/2021,1000,790,21,23,ACER Laptop,B76430134,';
-        const csvFilter = invoiceCsvFilter([header, invoiceLine]);
+        const sourceLines: ReadonlyArray<string> = [header, invoiceLine];
+        const csvFilter = invoiceCsvFilter(sourceLines);
         expect(csvFilter).toEqual([header]);
     })
     it("fichero con una sola factura con igic o el iva no es numerico, debería eliminar la línea", () => {
         const header = 'Num_factura, Fecha, Bruto, Neto, IVA, IGIC, Concepto, CIF_cliente, NIF_cliente';
         var invoiceLine = '1,02/05/2021,1000,790,21e,,ACER Laptop,B76430134,';
-        var csvFilter = invoiceCsvFilter([header, invoiceLine]);
+        const sourceLines: ReadonlyArray<string> = [header, invoiceLine];
+        var csvFilter = invoiceCsvFilter(sourceLines);
         expect(csvFilter).toEqual([header]);
         invoiceLine = '1,02/05/2021,1000,790,,21e,ACER Laptop,B76430134,';
-        csvFilter = invoiceCsvFilter([header, invoiceLine]);
+        const sourceLines2: ReadonlyArray<string> = [header, invoiceLine];
+        csvFilter = invoiceCsvFilter(sourceLines2);
         expect(csvFilter).toEqual([header]);
 
     });
@@ -65,20 +72,23 @@ describe("CSV Filter", () => {
     it('Un fichero con una sola factura con iva donde el neto está mal calculado, debería ser eliminada', () => {
         const header = 'Num_factura, Fecha, Bruto, Neto, IVA, IGIC, Concepto, CIF_cliente, NIF_cliente';
         const invoiceLine = '1,02/05/2021,1000,60,21,,ACER Laptop,B76430134,';
-        const csvFilter = invoiceCsvFilter([header, invoiceLine]);
+        const sourceLines: ReadonlyArray<string> = [header, invoiceLine];
+        const csvFilter = invoiceCsvFilter(sourceLines);
         expect(csvFilter).toEqual([header]);
     })
 
     it('Un fichero con una sola factura con igic donde el neto está mal calculado, debería ser eliminada', () => {
         const header = 'Num_factura, Fecha, Bruto, Neto, IVA, IGIC, Concepto, CIF_cliente, NIF_cliente';
         const invoiceLine = '1,02/05/2021,1000,60,,21,ACER Laptop,B76430134,';
-        const csvFilter = invoiceCsvFilter([header, invoiceLine]);
+        const sourceLines: ReadonlyArray<string> = [header, invoiceLine];
+        const csvFilter = invoiceCsvFilter(sourceLines);
         expect(csvFilter).toEqual([header]);
     })
     it('Un fichero con una sola factura donde CIF y NIF están rellenos, debería eliminar la línea', () => {
         const header = 'Num_factura, Fecha, Bruto, Neto, IVA, IGIC, Concepto, CIF_cliente, NIF_cliente';
         const invoiceLine = '1,02/05/2021,1000,790,21,,ACER Laptop,B76430134,63478309F';
-        const csvFilter = invoiceCsvFilter([header, invoiceLine]);
+        const sourceLines: ReadonlyArray<string> = [header, invoiceLine];
+        const csvFilter = invoiceCsvFilter(sourceLines);
         expect(csvFilter).toEqual([header]);
     })
 
@@ -89,7 +99,8 @@ describe("CSV Filter", () => {
         const invoiceLine2 = '1,02/05/2021,1000,790,21,,xaomi Laptop,B76430134,';
         const invoiceLine3 = '1,02/05/2021,1000,790,21,,bq Laptop,B76430134,';
         const invoiceLine4 = '2,02/05/2021,1000,790,21,,bq Laptop,B76430134,';
-        var csvFilter = invoiceCsvFilter([header, invoiceLine1, invoiceLine2, invoiceLine3, invoiceLine4]);
+        const sourceLines: ReadonlyArray<string> = [header, invoiceLine1, invoiceLine2, invoiceLine3, invoiceLine4];
+        var csvFilter = invoiceCsvFilter(sourceLines);
         expect(csvFilter).toEqual([header, invoiceLine4]);
     });
 
@@ -101,7 +112,8 @@ describe("CSV Filter", () => {
         const invoiceLine4 = '4,02/05/2021,1000,790,21,,bq Laptop,B76430134,63478309F';
         const invoiceLine5 = '5,02/05/2021,1000,790,21,,ACER Laptop,B76430134,';
         const invoiceLine6 = '6,02/05/2021,1000,790,,21,ACER Laptop,B76430134,';
-        var csvFilter = invoiceCsvFilter([header, invoiceLine1, invoiceLine2, invoiceLine3, invoiceLine4, invoiceLine5, invoiceLine6]);
+        const sourceLines: ReadonlyArray<string> = [header, invoiceLine1, invoiceLine2, invoiceLine3, invoiceLine4, invoiceLine5, invoiceLine6];
+        var csvFilter = invoiceCsvFilter(sourceLines);
         expect(csvFilter).toEqual([header, invoiceLine5, invoiceLine6]);
     });
 
