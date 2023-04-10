@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1681158827051" clover="3.2.0">
-  <project timestamp="1681158827051" name="All files">
+<coverage generated="1681159265297" clover="3.2.0">
+  <project timestamp="1681159265298" name="All files">
     <metrics statements="46" coveredstatements="45" conditionals="24" coveredconditionals="23" methods="13" coveredmethods="13" elements="83" coveredelements="81" complexity="0" loc="46" ncloc="46" packages="1" files="1" classes="1"/>
     <file name="invoiceCsvFilter.ts" path="/home/josepascual/workspace-testing/testing-library/src/core/kata/filtro-csv/invoiceCsvFilter.ts">
       <metrics statements="46" coveredstatements="45" conditionals="24" coveredconditionals="23" methods="13" coveredmethods="13"/>

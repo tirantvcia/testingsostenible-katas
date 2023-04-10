@@ -4,7 +4,7 @@ export function invoiceCsvFilter(invoiceLines: string[]) {
         return [];
     }
 
-    var validInvoiceLines = filterIncorrectLines(invoiceLines);
+    let validInvoiceLines = filterIncorrectLines(invoiceLines);
     validInvoiceLines = filterRepeatedLines(validInvoiceLines);
 
     return validInvoiceLines;
@@ -13,7 +13,7 @@ export function invoiceCsvFilter(invoiceLines: string[]) {
 }
 
 function filterIncorrectLines(lines: string[]) {
-    var facturaValida = [lines[0]];
+    let facturaValida = [lines[0]];
 
     lines.splice(0, 1);
     lines.filter(l => isInvoiceLineValid(l)).forEach(l => facturaValida.push(l));
@@ -29,7 +29,7 @@ function filterRepeatedLines(lines: string[]) {
     let map = new Map();
     lines.splice(0, 1);
     lines.forEach(l => {
-        var splitedElms = l.split(",");
+        let splitedElms = l.split(",");
         const idFactura = splitedElms[0];
         if (map.has(idFactura)) {
             map.get(idFactura).push(l);
@@ -78,9 +78,9 @@ function isNotValidIfBothNIFAndCIFValuesAreIndicated(cif: string, nif: string) {
 }
 function isNetValueCorrectInRelationToGross(impuesto: string, neto: string, bruto: string) {
     if (impuesto.length > 0 && neto.length > 0 && bruto.length > 0) {
-        var taxN = Number(impuesto);
-        var netoN = Number(neto);
-        var brutoN = Number(bruto);
+        const taxN = Number(impuesto);
+        const netoN = Number(neto);
+        const brutoN = Number(bruto);
         return (netoN == brutoN - (brutoN * (taxN / 100)));
     } else {
         return false;
