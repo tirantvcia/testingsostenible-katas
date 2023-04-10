@@ -4,27 +4,27 @@ export function invoiceCsvFilter(invoiceLines: string[]) {
         return [];
     }
 
-    var lineasCorrectas = filtrarLineasIncorrectas(invoiceLines);
-    lineasCorrectas = filtrarLineasRepetidas(lineasCorrectas);
+    var validInvoiceLines = filterIncorrectLines(invoiceLines);
+    validInvoiceLines = filterRepeatedLines(validInvoiceLines);
 
-    return lineasCorrectas;
+    return validInvoiceLines;
 
 
 }
 
-function filtrarLineasIncorrectas(lines: string[]) {
+function filterIncorrectLines(lines: string[]) {
     var facturaValida = [lines[0]];
 
     lines.splice(0, 1);
-    lines.filter(l => isLineaFacturaValida(l)).forEach(l => facturaValida.push(l));
+    lines.filter(l => isInvoiceLineValid(l)).forEach(l => facturaValida.push(l));
     return facturaValida;
 }
 
-function isLineaFacturaValida(lineaFactura: string) {
-    return !isNotValidaLineaFactura(lineaFactura);
+function isInvoiceLineValid(lineaFactura: string) {
+    return !isNotValidInvoiceLine(lineaFactura);
 }
 
-function filtrarLineasRepetidas(lines: string[]) {
+function filterRepeatedLines(lines: string[]) {
     const header = lines[0];
     let map = new Map();
     lines.splice(0, 1);
@@ -48,8 +48,8 @@ function filtrarLineasRepetidas(lines: string[]) {
     return filteredLines;
 }
 
-function isNotValidaLineaFactura(lineaFactura: string) {
-    const invoiceSplited = lineaFactura.split(",");
+function isNotValidInvoiceLine(invoiceLine: string) {
+    const invoiceSplited = invoiceLine.split(",");
     const ivaField = invoiceSplited[4];
     const igicField = invoiceSplited[5];
     const netoField = invoiceSplited[3];
@@ -57,26 +57,26 @@ function isNotValidaLineaFactura(lineaFactura: string) {
     const cifField = invoiceSplited[7];
     const nifField = invoiceSplited[8];
 
-    return (isNotValidSiAmbosValoresIVAIGICIndicados(ivaField, igicField) ||
-        (!isValorImpuestoNumerico(ivaField) || !isValorImpuestoNumerico(igicField)) ||
-        (ivaField.length > 0 && !isValorNetoCorrectoRespectoBruto(ivaField, netoField, brutoField)) ||
-        (igicField.length > 0 && !isValorNetoCorrectoRespectoBruto(igicField, netoField, brutoField)) ||
-        isNotValidSiAmbosValoresNifCifIndicados(cifField, nifField));
+    return (isNotValidLineIfBothVATAndIGICValuesAreIndicated(ivaField, igicField) ||
+        (!isNumericTaxValue(ivaField) || !isNumericTaxValue(igicField)) ||
+        (ivaField.length > 0 && !isNetValueCorrectInRelationToGross(ivaField, netoField, brutoField)) ||
+        (igicField.length > 0 && !isNetValueCorrectInRelationToGross(igicField, netoField, brutoField)) ||
+        isNotValidIfBothNIFAndCIFValuesAreIndicated(cifField, nifField));
 }
 
 
 
-function isNotValidSiAmbosValoresIVAIGICIndicados(iva: string, igic: string) {
-    return isArg1Arg2Informados(iva, igic);
+function isNotValidLineIfBothVATAndIGICValuesAreIndicated(iva: string, igic: string) {
+    return isBothArgumentsIndicated(iva, igic);
 }
-function isArg1Arg2Informados(cadena1: string, cadena2: string) {
-    return cadena1.length > 0 && cadena2.length > 0;
+function isBothArgumentsIndicated(arg1: string, arg2: string) {
+    return arg1.length > 0 && arg2.length > 0;
 }
 
-function isNotValidSiAmbosValoresNifCifIndicados(cif: string, nif: string) {
-    return isArg1Arg2Informados(cif, nif);
+function isNotValidIfBothNIFAndCIFValuesAreIndicated(cif: string, nif: string) {
+    return isBothArgumentsIndicated(cif, nif);
 }
-function isValorNetoCorrectoRespectoBruto(impuesto: string, neto: string, bruto: string) {
+function isNetValueCorrectInRelationToGross(impuesto: string, neto: string, bruto: string) {
     if (impuesto.length > 0 && neto.length > 0 && bruto.length > 0) {
         var taxN = Number(impuesto);
         var netoN = Number(neto);
@@ -88,7 +88,7 @@ function isValorNetoCorrectoRespectoBruto(impuesto: string, neto: string, bruto:
 }
 
 
-function isValorImpuestoNumerico(tax: string): boolean {
+function isNumericTaxValue(tax: string): boolean {
     if (tax.length == 0) {
         return true;
     }
