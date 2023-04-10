@@ -13,15 +13,15 @@ export function invoiceCsvFilter(invoiceLines: string[]) {
 }
 
 function filterIncorrectLines(lines: string[]) {
-    let facturaValida = [lines[0]];
+    let validInvoiceLines = [lines[0]];
 
     lines.splice(0, 1);
-    lines.filter(l => isInvoiceLineValid(l)).forEach(l => facturaValida.push(l));
-    return facturaValida;
+    lines.filter(l => isInvoiceLineValid(l)).forEach(l => validInvoiceLines.push(l));
+    return validInvoiceLines;
 }
 
-function isInvoiceLineValid(lineaFactura: string) {
-    return !isNotValidInvoiceLine(lineaFactura);
+function isInvoiceLineValid(invoiceLine: string) {
+    return !isNotValidInvoiceLine(invoiceLine);
 }
 
 function filterRepeatedLines(lines: string[]) {
@@ -30,11 +30,11 @@ function filterRepeatedLines(lines: string[]) {
     lines.splice(0, 1);
     lines.forEach(l => {
         let splitedElms = l.split(",");
-        const idFactura = splitedElms[0];
-        if (map.has(idFactura)) {
-            map.get(idFactura).push(l);
+        const idInvoice = splitedElms[0];
+        if (map.has(idInvoice)) {
+            map.get(idInvoice).push(l);
         } else {
-            map.set(idFactura, [l]);
+            map.set(idInvoice, [l]);
         }
 
     });
@@ -76,12 +76,12 @@ function isBothArgumentsIndicated(arg1: string, arg2: string) {
 function isNotValidIfBothNIFAndCIFValuesAreIndicated(cif: string, nif: string) {
     return isBothArgumentsIndicated(cif, nif);
 }
-function isNetValueCorrectInRelationToGross(impuesto: string, neto: string, bruto: string) {
-    if (impuesto.length > 0 && neto.length > 0 && bruto.length > 0) {
-        const taxN = Number(impuesto);
-        const netoN = Number(neto);
-        const brutoN = Number(bruto);
-        return (netoN == brutoN - (brutoN * (taxN / 100)));
+function isNetValueCorrectInRelationToGross(tax: string, netValue: string, grossValue: string) {
+    if (tax.length > 0 && netValue.length > 0 && grossValue.length > 0) {
+        const taxNumber = Number(tax);
+        const netValueNumber = Number(netValue);
+        const grossValueNumber = Number(grossValue);
+        return (netValueNumber == grossValueNumber - (grossValueNumber * (taxNumber / 100)));
     } else {
         return false;
     }
