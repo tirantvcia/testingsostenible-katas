@@ -21,6 +21,9 @@ describe("WordWrap functionallity", () => {
     it("Cadena original de longitud mayor al tamaño maximo linea, devuelve cadena partida", () => {
         expect(wordWrap('longword', 4)).toBe('long\nword');
     })
+    it("Cadena original de longitud mucho mayor al tamaño maximo linea, devuelve varias cadenas partidas", () => {
+        expect(wordWrap('reallylongword', 4)).toBe('real\nlylo\nngwo\nrd');
+    })
 });
 
 function wordWrap(cadenaOriginal: string, numeroCaracteresLinea: number) {
