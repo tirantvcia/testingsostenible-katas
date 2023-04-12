@@ -33,6 +33,15 @@ function wordWrap(cadenaOriginal: string, numeroCaracteresLinea: number) {
     return cadenaOriginal;
 }
 function partirCadena(cadenaOriginal: string, numeroCaracteresLinea: number) {
-    return cadenaOriginal.substring(0, numeroCaracteresLinea) + '\n' + cadenaOriginal.substring(numeroCaracteresLinea);
+    const longitudCadena = cadenaOriginal.length;
+    let cadenaPartida = '';
+    let posInicialSubCadena = 0;
+    let posFinalSubCadena = posInicialSubCadena + numeroCaracteresLinea;
+    while (posFinalSubCadena < longitudCadena) {
+        cadenaPartida = cadenaPartida + cadenaOriginal.substring(posInicialSubCadena, posFinalSubCadena) + '\n';
+        posInicialSubCadena = posFinalSubCadena;
+        posFinalSubCadena = posFinalSubCadena + numeroCaracteresLinea;
+    }
+    return cadenaPartida + cadenaOriginal.substring(posInicialSubCadena);
 }
 
