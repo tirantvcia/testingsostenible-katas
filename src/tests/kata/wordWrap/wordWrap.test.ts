@@ -18,6 +18,9 @@ describe("WordWrap functionallity", () => {
         expect(wordWrap('hell', 5)).toBe('hell');
         expect(wordWrap('hello', 5)).toBe('hello');
     })
+    it("Cadena original de longitud mayor al tamaño maximo linea, devuelve cadena partida", () => {
+        expect(wordWrap('longword', 4)).toBe('long\nword');
+    })
 });
 
 function wordWrap(cadenaOriginal: string, numeroCaracteresLinea: number) {
