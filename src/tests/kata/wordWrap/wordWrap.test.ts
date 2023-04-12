@@ -14,6 +14,10 @@ describe("WordWrap functionallity", () => {
         const result = wordWrap('', 5);
         expect(result).toBe('');
     })
+    it("Cadena original de longitud igual o menor al tamaño maximo linea, devuelve cadena", () => {
+        const result = wordWrap('hello', 5);
+        expect(result).toBe('hello');
+    })
 });
 
 function wordWrap(cadenaOriginal: string, numeroCaracteresLinea: number) {
