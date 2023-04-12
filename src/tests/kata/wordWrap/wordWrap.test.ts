@@ -17,5 +17,5 @@ describe("WordWrap functionallity", () => {
 });
 
 function wordWrap(cadenaOriginal: string, numeroCaracteresLinea: number) {
-    throw new Error("Function not implemented.");
+    return '';
 }
