@@ -24,5 +24,8 @@ describe("WordWrap functionallity", () => {
 });
 
 function wordWrap(cadenaOriginal: string, numeroCaracteresLinea: number) {
+    if (cadenaOriginal.length > numeroCaracteresLinea) {
+        return cadenaOriginal.substring(0, numeroCaracteresLinea) + '\n' + cadenaOriginal.substring(numeroCaracteresLinea);
+    }
     return cadenaOriginal;
 }
