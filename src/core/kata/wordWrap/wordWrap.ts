@@ -1,15 +1,23 @@
 export function wordWrap(cadenaOriginal: string, numeroCaracteresLinea: number) {
 
-    if (numeroCaracteresLinea < 0) {
+    if (esLongitudLineaMenorQueCero(numeroCaracteresLinea)) {
         throw new Error('Error longitud de tamaño linea');
     }
-    if (cadenaOriginal === null) {
+    if (esCadenaNula(cadenaOriginal)) {
         return '';
     }
 
     return partirCadenaPorEspaciosBlancos(cadenaOriginal, numeroCaracteresLinea);
 
 }
+function esLongitudLineaMenorQueCero(numeroCaracteresLinea: number) {
+    return numeroCaracteresLinea < 0;
+}
+
+function esCadenaNula(cadenaOriginal: string) {
+    return cadenaOriginal === null;
+}
+
 function partirCadena(cadenaOriginal: string, numeroCaracteresLinea: number) {
     const longitudCadena = cadenaOriginal.length;
     let cadenaPartida = '';
