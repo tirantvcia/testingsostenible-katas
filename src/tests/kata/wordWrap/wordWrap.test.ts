@@ -25,9 +25,12 @@ describe("WordWrap functionallity", () => {
     it("Cadena de longitud mucho mayor al tamaño maximo linea, devuelve varias cadenas partidas", () => {
         expect(wordWrap('reallylongword', 4)).toBe('real\nlylo\nngwo\nrd');
     })
-    it("Cadena con espacios en blanco mayor al tamaño máximo, devuelve cadenas partidas por el espacio en blanco", () => {
+    it("Cadena con espacios en blanco, devuelve cadenas partidas por el espacio en blanco", () => {
         expect(wordWrap('abc def', 4)).toBe('abc\ndef');
         expect(wordWrap('abc def ghi', 4)).toBe('abc\ndef\nghi');
+    })
+    it("Cadena con espacios en blanco y mayor al tamaño máximo, cadena partida por espacios y tamaños", () => {
+        expect(wordWrap(' abcdf', 4)).toBe('\nabcd\nf');
     })
 });
 
