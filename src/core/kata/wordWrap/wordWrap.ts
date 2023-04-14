@@ -1,6 +1,6 @@
 export function wordWrap(cadenaOriginal: string, numeroCaracteresLinea: number) {
     if (cadenaOriginal.includes(" ")) {
-        return partirCadenaPorEspaciosBlancos(cadenaOriginal);
+        return partirCadenaPorEspaciosBlancos(cadenaOriginal, numeroCaracteresLinea);
     }
     if (cadenaOriginal.length > numeroCaracteresLinea) {
         return partirCadena(cadenaOriginal, numeroCaracteresLinea);
@@ -20,8 +20,13 @@ function partirCadena(cadenaOriginal: string, numeroCaracteresLinea: number) {
     }
     return cadenaPartida + cadenaOriginal.substring(posInicialSubCadena);
 }
-function partirCadenaPorEspaciosBlancos(cadenaOriginal: string) {
+function partirCadenaPorEspaciosBlancos(cadenaOriginal: string, numeroCaracteresLinea: number) {
     const partesCadena: string[] = cadenaOriginal.split(" ");
-    return partesCadena.join("\n");
+
+    return partesCadena.map(function (val, index) {
+        return partirCadena(val, numeroCaracteresLinea);
+    }).join("\n");
+
+
 }
 
