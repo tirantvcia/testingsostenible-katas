@@ -3,11 +3,9 @@ export function wordWrap(cadenaOriginal: string, numeroCaracteresLinea: number) 
     if (cadenaOriginal === null) {
         return '';
     }
-    if (cadenaOriginal.length > numeroCaracteresLinea) {
-        return partirCadenaPorEspaciosBlancos(cadenaOriginal, numeroCaracteresLinea);
-    }
 
-    return cadenaOriginal;
+    return partirCadenaPorEspaciosBlancos(cadenaOriginal, numeroCaracteresLinea);
+
 }
 function partirCadena(cadenaOriginal: string, numeroCaracteresLinea: number) {
     const longitudCadena = cadenaOriginal.length;
