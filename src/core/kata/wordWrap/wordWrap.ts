@@ -1,5 +1,8 @@
 export function wordWrap(cadenaOriginal: string, numeroCaracteresLinea: number) {
 
+    if (cadenaOriginal === null) {
+        return '';
+    }
     if (cadenaOriginal.length > numeroCaracteresLinea) {
         return partirCadenaPorEspaciosBlancos(cadenaOriginal, numeroCaracteresLinea);
     }
