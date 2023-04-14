@@ -32,6 +32,9 @@ describe("WordWrap functionallity", () => {
     it("Cadena con espacios en blanco y mayor al tamaño máximo, cadena partida por espacios y tamaños", () => {
         expect(wordWrap(' abcdf', 4)).toBe('\nabcd\nf');
     })
+    it("Null, devuelve cadena vacia", () => {
+        expect(wordWrap(null, 4)).toBe('');
+    })
 });
 
 
