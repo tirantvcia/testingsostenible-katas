@@ -1,6 +1,8 @@
 export function wordWrap(cadenaOriginal: string, numeroCaracteresLinea: number) {
 
-
+    if (numeroCaracteresLinea < 0) {
+        throw new Error('Error longitud de tamaño linea');
+    }
     if (cadenaOriginal === null) {
         return '';
     }
