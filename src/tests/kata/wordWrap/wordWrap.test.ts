@@ -35,6 +35,9 @@ describe("WordWrap functionallity", () => {
     it("Null, devuelve cadena vacia", () => {
         expect(wordWrap(null, 4)).toBe('');
     })
+    it("tamaño linea menor que 0, error", () => {
+        expect(wordWrap('hello', -5)).toThrow();
+    })
 });
 
 

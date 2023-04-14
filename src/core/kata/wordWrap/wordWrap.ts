@@ -1,5 +1,6 @@
 export function wordWrap(cadenaOriginal: string, numeroCaracteresLinea: number) {
 
+
     if (cadenaOriginal === null) {
         return '';
     }
