@@ -11,19 +11,23 @@
 */
 import { wordWrap } from "../../../core/kata/wordWrap/wordWrap";
 describe("WordWrap functionallity", () => {
-    it("Cadena original vacia, devuelve vacio", () => {
+    it("Cadena vacia, devuelve vacio", () => {
         const result = wordWrap('', 5);
         expect(result).toBe('');
     })
-    it("Cadena original de longitud igual o menor al tamaño maximo linea, devuelve cadena", () => {
+    it("Cadena de longitud igual o menor al tamaño maximo linea, devuelve cadena", () => {
         expect(wordWrap('hell', 5)).toBe('hell');
         expect(wordWrap('hello', 5)).toBe('hello');
     })
-    it("Cadena original de longitud mayor al tamaño maximo linea, devuelve cadena partida", () => {
+    it("Cadena de longitud mayor al tamaño maximo linea, devuelve cadena partida", () => {
         expect(wordWrap('longword', 4)).toBe('long\nword');
     })
-    it("Cadena original de longitud mucho mayor al tamaño maximo linea, devuelve varias cadenas partidas", () => {
+    it("Cadena de longitud mucho mayor al tamaño maximo linea, devuelve varias cadenas partidas", () => {
         expect(wordWrap('reallylongword', 4)).toBe('real\nlylo\nngwo\nrd');
+    })
+    it("Cadena con espacios en blanco mayor al tamaño máximo, devuelve cadenas partidas por el espacio en blanco", () => {
+        expect(wordWrap('abc def', 4)).toBe('abc\ndef');
+        expect(wordWrap('abc def ghi', 4)).toBe('abc\ndef\nghi');
     })
 });
 

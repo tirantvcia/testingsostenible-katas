@@ -1,7 +1,11 @@
 export function wordWrap(cadenaOriginal: string, numeroCaracteresLinea: number) {
+    if (cadenaOriginal.includes(" ")) {
+        return partirCadenaPorEspaciosBlancos(cadenaOriginal);
+    }
     if (cadenaOriginal.length > numeroCaracteresLinea) {
         return partirCadena(cadenaOriginal, numeroCaracteresLinea);
     }
+
     return cadenaOriginal;
 }
 function partirCadena(cadenaOriginal: string, numeroCaracteresLinea: number) {
@@ -16,3 +20,8 @@ function partirCadena(cadenaOriginal: string, numeroCaracteresLinea: number) {
     }
     return cadenaPartida + cadenaOriginal.substring(posInicialSubCadena);
 }
+function partirCadenaPorEspaciosBlancos(cadenaOriginal: string) {
+    const partesCadena: string[] = cadenaOriginal.split(" ");
+    return partesCadena.join("\n");
+}
+
