@@ -1,22 +1,15 @@
 export function invoiceCsvFilter(invoiceLines: ReadonlyArray<string>) {
-
     if (invoiceLines.length === 0 || invoiceLines.length === 1) {
         return [];
     }
-
     let validInvoiceLines = filterIncorrectLines(invoiceLines);
     validInvoiceLines = filterRepeatedLines(validInvoiceLines);
-
     return validInvoiceLines;
-
-
 }
 
 function filterIncorrectLines(readonlyInvoiceLines: ReadonlyArray<string>) {
     let validInvoiceLines = [readonlyInvoiceLines[0]];
-
     let copyInvoiceLines = [...readonlyInvoiceLines]; // create a copy of the readonly array
-
     copyInvoiceLines.splice(0, 1);
     copyInvoiceLines.filter(l => isInvoiceLineValid(l)).forEach(l => validInvoiceLines.push(l));
     return validInvoiceLines;
@@ -30,24 +23,31 @@ function filterRepeatedLines(lines: string[]) {
     const header = lines[0];
     let map = new Map();
     lines.splice(0, 1);
-    lines.forEach(l => {
-        let splitedElms = l.split(",");
-        const idInvoice = splitedElms[0];
-        if (map.has(idInvoice)) {
-            map.get(idInvoice).push(l);
-        } else {
-            map.set(idInvoice, [l]);
-        }
-
-    });
     let filteredLines = [header.toString()];
-    for (let lines of map.values()) {
-        if (lines.length == 1) {
-            filteredLines.push(lines.toString());
-        }
-    }
+    const idWithMoreThanOneAppereance = getIdInvoiceWithMoreThanOneAppeareance(lines);
+    const linesNotRepeated = lines.filter(l => {
+        let splitedElms = l.split(",");
+        return idWithMoreThanOneAppereance.indexOf(splitedElms[0]) === -1;
+    });
 
+    linesNotRepeated.forEach(element => {
+        filteredLines.push(element);
+    });
     return filteredLines;
+}
+
+function getIdInvoiceWithMoreThanOneAppeareance(lines : string[]) {
+    let idInvoicesCount = lines.map(l => {
+        let splitedElms = l.split(",");
+        return splitedElms[0];
+    }).reduce((map, idInvoice) => {
+        map[idInvoice] = (map[idInvoice] || 0) + 1;
+        return map;
+    }, {});
+   return  Object.entries(idInvoicesCount).filter(([key, value]) => {
+        return (value > 1);
+    }).map(([key, value]) => key);
+
 }
 
 function isNotValidInvoiceLine(invoiceLine: string) {

@@ -21,6 +21,7 @@ Listado de pruebas
  Un fichero de una sola línea es incorrecto porque no tiene cabecera
  */
 describe("CSV Filter", () => {
+    
     it("fichero con una sola factura con iva indicado donde todo es correcto, debería producir como salida la misma línea", () => {
         const header = 'Num_factura, Fecha, Bruto, Neto, IVA, IGIC, Concepto, CIF_cliente, NIF_cliente';
         const invoiceLine = '1,02/05/2021,1000,790,21,,ACER Laptop,B76430134,';
@@ -91,7 +92,6 @@ describe("CSV Filter", () => {
         const csvFilter = invoiceCsvFilter(sourceLines);
         expect(csvFilter).toEqual([header]);
     })
-
 
     it("Si el número de factura se repite en varias líneas, se eliminan todas ellas (sin dejar ninguna línea)", () => {
         const header = 'Num_factura, Fecha, Bruto, Neto, IVA, IGIC, Concepto, CIF_cliente, NIF_cliente';
