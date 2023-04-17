@@ -21,7 +21,6 @@ function isInvoiceLineValid(invoiceLine: string) {
 
 function filterRepeatedLines(lines: string[]) {
     const header = lines[0];
-    let map = new Map();
     lines.splice(0, 1);
     let filteredLines = [header.toString()];
     const idWithMoreThanOneAppereance = getIdInvoiceWithMoreThanOneAppeareance(lines);
@@ -29,7 +28,6 @@ function filterRepeatedLines(lines: string[]) {
         let splitedElms = l.split(",");
         return idWithMoreThanOneAppereance.indexOf(splitedElms[0]) === -1;
     });
-
     linesNotRepeated.forEach(element => {
         filteredLines.push(element);
     });
@@ -37,17 +35,20 @@ function filterRepeatedLines(lines: string[]) {
 }
 
 function getIdInvoiceWithMoreThanOneAppeareance(lines : string[]) {
-    let idInvoicesCount = lines.map(l => {
+    let idInvoicesCount = getIdInvoincesCount(lines);
+   return  Object.entries(idInvoicesCount).filter(([key, value]) => {
+        return (value > 1);
+    }).map(([key, value]) => key);
+}
+
+function getIdInvoincesCount(lines: string[]) {
+    return lines.map(l => {
         let splitedElms = l.split(",");
         return splitedElms[0];
     }).reduce((map, idInvoice) => {
         map[idInvoice] = (map[idInvoice] || 0) + 1;
         return map;
     }, {});
-   return  Object.entries(idInvoicesCount).filter(([key, value]) => {
-        return (value > 1);
-    }).map(([key, value]) => key);
-
 }
 
 function isNotValidInvoiceLine(invoiceLine: string) {
@@ -58,15 +59,12 @@ function isNotValidInvoiceLine(invoiceLine: string) {
     const brutoField = invoiceSplited[2];
     const cifField = invoiceSplited[7];
     const nifField = invoiceSplited[8];
-
     return (isNotValidLineIfBothVATAndIGICValuesAreIndicated(ivaField, igicField) ||
         (!isNumericTaxValue(ivaField) || !isNumericTaxValue(igicField)) ||
         (ivaField.length > 0 && !isNetValueCorrectInRelationToGross(ivaField, netoField, brutoField)) ||
         (igicField.length > 0 && !isNetValueCorrectInRelationToGross(igicField, netoField, brutoField)) ||
         isNotValidIfBothNIFAndCIFValuesAreIndicated(cifField, nifField));
 }
-
-
 
 function isNotValidLineIfBothVATAndIGICValuesAreIndicated(iva: string, igic: string) {
     return isBothArgumentsIndicated(iva, igic);
@@ -78,17 +76,17 @@ function isBothArgumentsIndicated(arg1: string, arg2: string) {
 function isNotValidIfBothNIFAndCIFValuesAreIndicated(cif: string, nif: string) {
     return isBothArgumentsIndicated(cif, nif);
 }
+
 function isNetValueCorrectInRelationToGross(tax: string, netValue: string, grossValue: string) {
-    if (tax.length > 0 && netValue.length > 0 && grossValue.length > 0) {
-        const taxNumber = Number(tax);
-        const netValueNumber = Number(netValue);
-        const grossValueNumber = Number(grossValue);
-        return (netValueNumber == grossValueNumber - (grossValueNumber * (taxNumber / 100)));
-    } else {
+    const hasRequiredValues = (tax.length > 0 && netValue.length > 0 && grossValue.length > 0);
+    if (!hasRequiredValues) {
         return false;
     }
+    const taxNumber = Number(tax);
+    const netValueNumber = Number(netValue);
+    const grossValueNumber = Number(grossValue);
+    return (netValueNumber == grossValueNumber - (grossValueNumber * (taxNumber / 100)));
 }
-
 
 function isNumericTaxValue(tax: string): boolean {
     if (tax.length == 0) {
