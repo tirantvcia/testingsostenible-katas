@@ -22,10 +22,9 @@ function partirCadenaPorNumeroCaracteres(cadena: string, numeroCaracteresLinea: 
     if(cadena.length <= numeroCaracteresLinea) {
         return cadena;
     }
-    const posInicialSubCadena = 0;
-    let cadenaPartida = cadena.substring(posInicialSubCadena, numeroCaracteresLinea) + '\n';
-    cadenaPartida = cadenaPartida.concat(partirCadenaPorNumeroCaracteres(cadena.substring(numeroCaracteresLinea), numeroCaracteresLinea));
-    return cadenaPartida;
+    const cadenaPartida = cadena.substring(0, numeroCaracteresLinea) + '\n';
+    const restoSubCadena = cadena.substring(numeroCaracteresLinea);
+    return cadenaPartida.concat(partirCadenaPorNumeroCaracteres(restoSubCadena, numeroCaracteresLinea));
 }
 
 function partirCadena(cadenaOriginal: string, numeroCaracteresLinea: number) {
