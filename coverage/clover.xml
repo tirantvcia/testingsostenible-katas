@@ -1,62 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1681763012925" clover="3.2.0">
-  <project timestamp="1681763012926" name="All files">
-    <metrics statements="53" coveredstatements="52" conditionals="22" coveredconditionals="21" methods="20" coveredmethods="20" elements="95" coveredelements="93" complexity="0" loc="53" ncloc="53" packages="1" files="1" classes="1"/>
-    <file name="invoiceCsvFilter.ts" path="/home/josepascual/workspace-testing/testing-library/src/core/kata/filtro-csv/invoiceCsvFilter.ts">
-      <metrics statements="53" coveredstatements="52" conditionals="22" coveredconditionals="21" methods="20" coveredmethods="20"/>
-      <line num="1" count="1" type="stmt"/>
-      <line num="2" count="12" type="cond" truecount="3" falsecount="0"/>
-      <line num="3" count="2" type="stmt"/>
-      <line num="5" count="10" type="stmt"/>
-      <line num="6" count="10" type="stmt"/>
-      <line num="7" count="10" type="stmt"/>
-      <line num="11" count="10" type="stmt"/>
-      <line num="12" count="10" type="stmt"/>
-      <line num="13" count="10" type="stmt"/>
-      <line num="14" count="18" type="stmt"/>
-      <line num="15" count="10" type="stmt"/>
-      <line num="19" count="18" type="stmt"/>
-      <line num="23" count="10" type="stmt"/>
-      <line num="24" count="10" type="stmt"/>
-      <line num="25" count="10" type="stmt"/>
-      <line num="26" count="10" type="stmt"/>
-      <line num="27" count="10" type="stmt"/>
-      <line num="28" count="8" type="stmt"/>
-      <line num="29" count="8" type="stmt"/>
-      <line num="31" count="10" type="stmt"/>
-      <line num="32" count="5" type="stmt"/>
-      <line num="34" count="10" type="stmt"/>
-      <line num="38" count="10" type="stmt"/>
-      <line num="39" count="10" type="stmt"/>
-      <line num="40" count="6" type="stmt"/>
-      <line num="41" count="1" type="stmt"/>
-      <line num="45" count="10" type="stmt"/>
-      <line num="46" count="8" type="stmt"/>
-      <line num="47" count="8" type="stmt"/>
-      <line num="49" count="8" type="cond" truecount="2" falsecount="0"/>
-      <line num="50" count="8" type="stmt"/>
-      <line num="55" count="18" type="stmt"/>
-      <line num="56" count="18" type="stmt"/>
-      <line num="57" count="18" type="stmt"/>
-      <line num="58" count="18" type="stmt"/>
-      <line num="59" count="18" type="stmt"/>
-      <line num="60" count="18" type="stmt"/>
-      <line num="61" count="18" type="stmt"/>
-      <line num="62" count="18" type="cond" truecount="8" falsecount="0"/>
-      <line num="70" count="18" type="stmt"/>
-      <line num="73" count="28" type="cond" truecount="2" falsecount="0"/>
-      <line num="77" count="10" type="stmt"/>
-      <line num="81" count="13" type="cond" truecount="3" falsecount="0"/>
-      <line num="82" count="13" type="cond" truecount="0" falsecount="1"/>
-      <line num="83" count="0" type="stmt"/>
-      <line num="85" count="13" type="stmt"/>
-      <line num="86" count="13" type="stmt"/>
-      <line num="87" count="13" type="stmt"/>
-      <line num="88" count="13" type="stmt"/>
-      <line num="92" count="30" type="cond" truecount="1" falsecount="0"/>
-      <line num="93" count="14" type="stmt"/>
-      <line num="95" count="16" type="stmt"/>
-      <line num="96" count="16" type="cond" truecount="2" falsecount="0"/>
-    </file>
+<coverage generated="1681765598761" clover="3.2.0">
+  <project timestamp="1681765598761" name="All files">
+    <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0" elements="0" coveredelements="0" complexity="0" loc="0" ncloc="0" packages="0" files="0" classes="0"/>
   </project>
 </coverage>
