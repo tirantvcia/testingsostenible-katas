@@ -29,11 +29,12 @@ function partirCadenaPorNumeroCaracteres(cadena: string, numeroCaracteresLinea: 
 }
 
 function partirCadena(cadenaOriginal: string, numeroCaracteresLinea: number) {
-    const partesCadena: string[] = cadenaOriginal.split(" ");
+    const partesCadena: string[] = partirCadenaPorEspaciosEnBlanco(cadenaOriginal);
     return partesCadena.map(function (val, index) {
         return partirCadenaPorNumeroCaracteres(val, numeroCaracteresLinea);
     }).join("\n");
 }
 
-
-
+function partirCadenaPorEspaciosEnBlanco(cadena: string) {
+    return cadena.split(" ");
+}
