@@ -50,11 +50,17 @@ class Cadena {
     valor () {
         return this.texto;
     }
+    esLongitudCadenaMenorIgualQue(numeroCaracteresLinea: NumeroCaracteresLinea){
+        return this.valor().length <= numeroCaracteresLinea.valor(); 
+    }
     partirCadenaPorEspaciosEnBlanco() {
         return this.valor().split(" ");
     }
-    esLongitudCadenaMenorIgualQue(numeroCaracteresLinea: NumeroCaracteresLinea){
-        return this.valor().length <= numeroCaracteresLinea.valor(); 
+    partirPorIndices(posInicial: number, posFinal:number) {
+        return this.valor().substring(posInicial, posFinal);
+    }
+    partirPorIndice(posInicial: number) {
+        return this.valor().substring(posInicial);
     }
 }
 
@@ -78,8 +84,8 @@ function partirCadenaPorNumeroCaracteres(cadena: Cadena, numeroCaracteresLinea: 
     if(cadena.esLongitudCadenaMenorIgualQue(numeroCaracteresLinea)) {
         return cadena.valor();
     }
-    const cadenaPartida = cadena.valor().substring(0, numeroCaracteresLinea.valor()) + '\n';
-    const restoSubCadena = Cadena.crear(cadena.valor().substring(numeroCaracteresLinea.valor()));
+    const cadenaPartida = cadena.partirPorIndices(0, numeroCaracteresLinea.valor()) + '\n';
+    const restoSubCadena = Cadena.crear(cadena.partirPorIndice(numeroCaracteresLinea.valor()));
     return cadenaPartida.concat(partirCadenaPorNumeroCaracteres(restoSubCadena, numeroCaracteresLinea));
 }
 
