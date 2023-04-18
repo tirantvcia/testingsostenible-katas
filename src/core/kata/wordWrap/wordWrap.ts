@@ -59,7 +59,7 @@ class Cadena {
     partirPorIndices(posInicial: number, posFinal:number) {
         return this.valor().substring(posInicial, posFinal);
     }
-    partirPorIndice(posInicial: number) {
+    partirDesdeIndice(posInicial: number) {
         return this.valor().substring(posInicial);
     }
 }
@@ -85,7 +85,7 @@ function partirCadenaPorNumeroCaracteres(cadena: Cadena, numeroCaracteresLinea: 
         return cadena.valor();
     }
     const cadenaPartida = cadena.partirPorIndices(0, numeroCaracteresLinea.valor()) + '\n';
-    const restoSubCadena = Cadena.crear(cadena.partirPorIndice(numeroCaracteresLinea.valor()));
+    const restoSubCadena = Cadena.crear(cadena.partirDesdeIndice(numeroCaracteresLinea.valor()));
     return cadenaPartida.concat(partirCadenaPorNumeroCaracteres(restoSubCadena, numeroCaracteresLinea));
 }
 
