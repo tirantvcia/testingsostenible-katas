@@ -1,4 +1,4 @@
-export function wordWrap(cadenaOriginal: string, numeroCaracteresLinea: number) {
+function wordWrapOld(cadenaOriginal: string, numeroCaracteresLinea: number) {
 
     if (esLongitudLineaMenorQueCero(numeroCaracteresLinea)) {
         throw new Error('Error longitud de tamaño linea');
@@ -6,10 +6,32 @@ export function wordWrap(cadenaOriginal: string, numeroCaracteresLinea: number) 
     if (esCadenaNula(cadenaOriginal)) {
         return '';
     }
-
     return partirCadena(cadenaOriginal, numeroCaracteresLinea);
-
 }
+
+class NumeroCaracteresLinea {
+    constructor(private readonly longitud: number) {
+        if (esLongitudLineaMenorQueCero(longitud)) {
+            throw new Error('Error longitud de tamaño linea');
+        }
+    }
+    valor () {
+        return this.longitud;
+    }
+}
+
+export function wordWrap(cadenaOriginal: string, numeroCaracteresLinea: number) {
+    return wordWrapNoPrimitive(cadenaOriginal, new NumeroCaracteresLinea(numeroCaracteresLinea)) ;
+}
+
+function wordWrapNoPrimitive(cadenaOriginal: string, numeroCaracteresLinea: NumeroCaracteresLinea) {
+
+    if (esCadenaNula(cadenaOriginal)) {
+        return '';
+    }
+    return partirCadena(cadenaOriginal, numeroCaracteresLinea.valor());
+}
+
 function esLongitudLineaMenorQueCero(numeroCaracteresLinea: number) {
     return numeroCaracteresLinea < 0;
 }
