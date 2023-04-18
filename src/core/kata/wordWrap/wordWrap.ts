@@ -57,7 +57,7 @@ class Cadena {
         return this.valor().split(" ");
     }
     partirPorIndices(posInicial: number, posFinal:number) {
-        return this.valor().substring(posInicial, posFinal);
+        return this.valor().substring(posInicial, posFinal) + '\n';
     }
     partirDesdeIndice(posInicial: number) {
         return this.valor().substring(posInicial);
@@ -84,7 +84,7 @@ function partirCadenaPorNumeroCaracteres(cadena: Cadena, numeroCaracteresLinea: 
     if(cadena.esLongitudCadenaMenorIgualQue(numeroCaracteresLinea)) {
         return cadena.valor();
     }
-    const cadenaPartida = cadena.partirPorIndices(0, numeroCaracteresLinea.valor()) + '\n';
+    const cadenaPartida = cadena.partirPorIndices(0, numeroCaracteresLinea.valor()) ;
     const restoSubCadena = Cadena.crear(cadena.partirDesdeIndice(numeroCaracteresLinea.valor()));
     return cadenaPartida.concat(partirCadenaPorNumeroCaracteres(restoSubCadena, numeroCaracteresLinea));
 }
