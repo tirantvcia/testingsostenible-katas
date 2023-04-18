@@ -10,18 +10,21 @@ function wordWrapOld(cadenaOriginal: string, numeroCaracteresLinea: number) {
 }
 
 class NumeroCaracteresLinea {
-    constructor(private readonly longitud: number) {
+    private constructor(private readonly longitud: number) {
+    }
+    static crear (longitud: number){
         if (esLongitudLineaMenorQueCero(longitud)) {
             throw new Error('Error longitud de tamaño linea');
         }
-    }
+        return new NumeroCaracteresLinea(longitud); 
+    } 
     valor () {
         return this.longitud;
     }
 }
 
 export function wordWrap(cadenaOriginal: string, numeroCaracteresLinea: number) {
-    return wordWrapNoPrimitive(cadenaOriginal, new NumeroCaracteresLinea(numeroCaracteresLinea)) ;
+    return wordWrapNoPrimitive(cadenaOriginal, NumeroCaracteresLinea.crear(numeroCaracteresLinea)) ;
 }
 
 function wordWrapNoPrimitive(cadenaOriginal: string, numeroCaracteresLinea: NumeroCaracteresLinea) {
