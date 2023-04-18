@@ -6,7 +6,18 @@ function wordWrapOld(cadenaOriginal: string, numeroCaracteresLinea: number) {
     if (esCadenaNula(cadenaOriginal)) {
         return '';
     }
-    return partirCadena(cadenaOriginal, numeroCaracteresLinea);
+    return partirCadenaOld(cadenaOriginal, numeroCaracteresLinea);
+}
+
+function partirCadenaOld(cadenaOriginal: string, numeroCaracteresLinea: number) {
+}
+
+function esLongitudLineaMenorQueCero(numeroCaracteresLinea: number) {
+    return numeroCaracteresLinea < 0;
+}
+
+function esCadenaNula(texto: string) {
+    return texto === null;
 }
 
 export function wordWrap(texto: string, numeroCaracteresLinea: number) {
@@ -39,44 +50,36 @@ class Cadena {
     valor () {
         return this.texto;
     }
+    partirCadenaPorEspaciosEnBlanco() {
+        return this.valor().split(" ");
+    }
     esLongitudCadenaMenorIgualQue(numeroCaracteresLinea: NumeroCaracteresLinea){
-        this.valor().length <= numeroCaracteresLinea.valor(); 
+        return this.valor().length <= numeroCaracteresLinea.valor(); 
     }
 }
-
-
 
 function wordWrapNoPrimitive(cadenaOriginal: Cadena, numeroCaracteresLinea: NumeroCaracteresLinea) {
-   
-
-
-    return partirCadena(cadenaOriginal.valor(), numeroCaracteresLinea.valor());
+       return partirCadena(cadenaOriginal, numeroCaracteresLinea);
 }
 
-function esLongitudLineaMenorQueCero(numeroCaracteresLinea: number) {
-    return numeroCaracteresLinea < 0;
-}
 
-function esCadenaNula(texto: string) {
-    return texto === null;
-}
 
-function partirCadenaPorNumeroCaracteres(cadena: string, numeroCaracteresLinea: number) {
-    if(cadena.length <= numeroCaracteresLinea) {
-        return cadena;
-    }
-    const cadenaPartida = cadena.substring(0, numeroCaracteresLinea) + '\n';
-    const restoSubCadena = cadena.substring(numeroCaracteresLinea);
-    return cadenaPartida.concat(partirCadenaPorNumeroCaracteres(restoSubCadena, numeroCaracteresLinea));
-}
-
-function partirCadena(cadenaOriginal: string, numeroCaracteresLinea: number) {
-    const partesCadena: string[] = partirCadenaPorEspaciosEnBlanco(cadenaOriginal);
+function partirCadena(cadenaOriginal: Cadena, numeroCaracteresLinea: NumeroCaracteresLinea) {
+    const partesCadena: string[] = cadenaOriginal.partirCadenaPorEspaciosEnBlanco();
     return partesCadena.map(function (val, index) {
-        return partirCadenaPorNumeroCaracteres(val, numeroCaracteresLinea);
+        const subCadena = Cadena.crear(val);
+        return partirCadenaPorNumeroCaracteres(subCadena, numeroCaracteresLinea);
     }).join("\n");
 }
 
-function partirCadenaPorEspaciosEnBlanco(cadena: string) {
-    return cadena.split(" ");
+
+
+function partirCadenaPorNumeroCaracteres(cadena: Cadena, numeroCaracteresLinea: NumeroCaracteresLinea) {
+    if(cadena.esLongitudCadenaMenorIgualQue(numeroCaracteresLinea)) {
+        return cadena.valor();
+    }
+    const cadenaPartida = cadena.valor().substring(0, numeroCaracteresLinea.valor()) + '\n';
+    const restoSubCadena = Cadena.crear(cadena.valor().substring(numeroCaracteresLinea.valor()));
+    return cadenaPartida.concat(partirCadenaPorNumeroCaracteres(restoSubCadena, numeroCaracteresLinea));
 }
+

@@ -1,39 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1681804707652" clover="3.2.0">
-  <project timestamp="1681804707652" name="All files">
-    <metrics statements="30" coveredstatements="23" conditionals="5" coveredconditionals="3" methods="16" coveredmethods="13" elements="51" coveredelements="39" complexity="0" loc="30" ncloc="30" packages="1" files="1" classes="1"/>
+<coverage generated="1681805605566" clover="3.2.0">
+  <project timestamp="1681805605567" name="All files">
+    <metrics statements="31" coveredstatements="25" conditionals="5" coveredconditionals="3" methods="17" coveredmethods="14" elements="53" coveredelements="42" complexity="0" loc="31" ncloc="31" packages="1" files="1" classes="1"/>
     <file name="wordWrap.ts" path="/home/josepascual/workspace-testing/testing-library/src/core/kata/wordWrap/wordWrap.ts">
-      <metrics statements="30" coveredstatements="23" conditionals="5" coveredconditionals="3" methods="16" coveredmethods="13"/>
+      <metrics statements="31" coveredstatements="25" conditionals="5" coveredconditionals="3" methods="17" coveredmethods="14"/>
       <line num="3" count="0" type="cond" truecount="0" falsecount="1"/>
       <line num="4" count="0" type="stmt"/>
       <line num="6" count="0" type="cond" truecount="0" falsecount="1"/>
       <line num="7" count="0" type="stmt"/>
       <line num="9" count="0" type="stmt"/>
-      <line num="12" count="1" type="stmt"/>
-      <line num="13" count="10" type="stmt"/>
-      <line num="17" count="9" type="stmt"/>
-      <line num="20" count="10" type="cond" truecount="1" falsecount="0"/>
-      <line num="21" count="1" type="stmt"/>
-      <line num="23" count="9" type="stmt"/>
-      <line num="26" count="9" type="stmt"/>
-      <line num="31" count="10" type="stmt"/>
-      <line num="34" count="10" type="cond" truecount="1" falsecount="0"/>
-      <line num="35" count="1" type="stmt"/>
-      <line num="37" count="9" type="stmt"/>
-      <line num="40" count="9" type="stmt"/>
-      <line num="43" count="0" type="stmt"/>
-      <line num="53" count="9" type="stmt"/>
-      <line num="57" count="10" type="stmt"/>
-      <line num="61" count="0" type="stmt"/>
-      <line num="65" count="18" type="cond" truecount="1" falsecount="0"/>
-      <line num="66" count="13" type="stmt"/>
-      <line num="68" count="5" type="stmt"/>
-      <line num="69" count="5" type="stmt"/>
-      <line num="70" count="5" type="stmt"/>
-      <line num="74" count="9" type="stmt"/>
-      <line num="75" count="9" type="stmt"/>
-      <line num="76" count="13" type="stmt"/>
-      <line num="81" count="9" type="stmt"/>
+      <line num="16" count="10" type="stmt"/>
+      <line num="20" count="0" type="stmt"/>
+      <line num="23" count="1" type="stmt"/>
+      <line num="24" count="10" type="stmt"/>
+      <line num="28" count="9" type="stmt"/>
+      <line num="31" count="10" type="cond" truecount="1" falsecount="0"/>
+      <line num="32" count="1" type="stmt"/>
+      <line num="34" count="9" type="stmt"/>
+      <line num="37" count="28" type="stmt"/>
+      <line num="42" count="28" type="stmt"/>
+      <line num="45" count="28" type="cond" truecount="1" falsecount="0"/>
+      <line num="46" count="1" type="stmt"/>
+      <line num="48" count="27" type="stmt"/>
+      <line num="51" count="50" type="stmt"/>
+      <line num="54" count="9" type="stmt"/>
+      <line num="57" count="18" type="stmt"/>
+      <line num="62" count="9" type="stmt"/>
+      <line num="68" count="9" type="stmt"/>
+      <line num="69" count="9" type="stmt"/>
+      <line num="70" count="13" type="stmt"/>
+      <line num="71" count="13" type="stmt"/>
+      <line num="78" count="18" type="cond" truecount="1" falsecount="0"/>
+      <line num="79" count="13" type="stmt"/>
+      <line num="81" count="5" type="stmt"/>
+      <line num="82" count="5" type="stmt"/>
+      <line num="83" count="5" type="stmt"/>
     </file>
   </project>
 </coverage>
