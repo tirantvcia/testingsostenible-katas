@@ -9,6 +9,10 @@ function wordWrapOld(cadenaOriginal: string, numeroCaracteresLinea: number) {
     return partirCadena(cadenaOriginal, numeroCaracteresLinea);
 }
 
+export function wordWrap(texto: string, numeroCaracteresLinea: number) {
+    return wordWrapNoPrimitive(Cadena.crear(texto), NumeroCaracteresLinea.crear(numeroCaracteresLinea)) ;
+}
+
 class NumeroCaracteresLinea {
     private constructor(private readonly longitud: number) {
     }
@@ -23,24 +27,38 @@ class NumeroCaracteresLinea {
     }
 }
 
-export function wordWrap(cadenaOriginal: string, numeroCaracteresLinea: number) {
-    return wordWrapNoPrimitive(cadenaOriginal, NumeroCaracteresLinea.crear(numeroCaracteresLinea)) ;
+class Cadena {
+    private constructor(private readonly texto: string) {
+    }
+    static crear (texto: string){
+        if (texto == null) {
+            return new Cadena('');
+        }
+        return new Cadena(texto); 
+    } 
+    valor () {
+        return this.texto;
+    }
+    esLongitudCadenaMenorIgualQue(numeroCaracteresLinea: NumeroCaracteresLinea){
+        this.valor().length <= numeroCaracteresLinea.valor(); 
+    }
 }
 
-function wordWrapNoPrimitive(cadenaOriginal: string, numeroCaracteresLinea: NumeroCaracteresLinea) {
 
-    if (esCadenaNula(cadenaOriginal)) {
-        return '';
-    }
-    return partirCadena(cadenaOriginal, numeroCaracteresLinea.valor());
+
+function wordWrapNoPrimitive(cadenaOriginal: Cadena, numeroCaracteresLinea: NumeroCaracteresLinea) {
+   
+
+
+    return partirCadena(cadenaOriginal.valor(), numeroCaracteresLinea.valor());
 }
 
 function esLongitudLineaMenorQueCero(numeroCaracteresLinea: number) {
     return numeroCaracteresLinea < 0;
 }
 
-function esCadenaNula(cadenaOriginal: string) {
-    return cadenaOriginal === null;
+function esCadenaNula(texto: string) {
+    return texto === null;
 }
 
 function partirCadenaPorNumeroCaracteres(cadena: string, numeroCaracteresLinea: number) {
