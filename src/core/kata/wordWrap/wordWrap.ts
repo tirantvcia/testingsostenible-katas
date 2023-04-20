@@ -40,11 +40,11 @@ class TextToWrapped {
   splitByWhiteSpaces() {
     return this.value().split(" ");
   }
-  splitByPositions(posInicial: number, posFinal: number) {
-    return this.value().substring(posInicial, posFinal) + "\n";
+  splitByPositions(startPosition: number, endPosition: number) {
+    return this.value().substring(startPosition, endPosition) + "\n";
   }
-  splitFromPosition(posInicial: number) {
-    return this.value().substring(posInicial);
+  splitFromPosition(startPosition: number) {
+    return this.value().substring(startPosition);
   }
 
   wrapByNumCharsPerLine(numCharsPerLine: NumCharsPerLine) {
