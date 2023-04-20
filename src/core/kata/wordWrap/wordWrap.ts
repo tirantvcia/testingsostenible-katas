@@ -1,6 +1,6 @@
 export function wordWrap(text: string, numCharsPerLine: number) {
-  const textToWrapped = TextToWrapped.create(text);
-  return textToWrapped.wrap(
+  const textToWrap = TextToWrap.create(text);
+  return textToWrap.wrap(
     NumCharsPerLine.create(numCharsPerLine)
   );
 }
@@ -23,13 +23,13 @@ class NumCharsPerLine {
   }
 }
 
-class TextToWrapped {
+class TextToWrap {
   private constructor(private readonly textToWrapped: string) {}
-  static create(textToWrapped: string) {
-    if (textToWrapped == null) {
-      return new TextToWrapped("");
+  static create(textToWrap: string) {
+    if (textToWrap == null) {
+      return new TextToWrap("");
     }
-    return new TextToWrapped(textToWrapped);
+    return new TextToWrap(textToWrap);
   }
   value() {
     return this.textToWrapped;
@@ -52,7 +52,7 @@ class TextToWrapped {
       return this.value();
     }
     const wrappedText = this.splitByPositions(0,numCharsPerLine.value()) + "\n";
-    const unWrappedText = TextToWrapped.create(this.splitFromPosition(numCharsPerLine.value()));
+    const unWrappedText = TextToWrap.create(this.splitFromPosition(numCharsPerLine.value()));
     return wrappedText.concat(unWrappedText.wrapByNumCharsPerLine(numCharsPerLine));
   }
 
@@ -60,7 +60,7 @@ class TextToWrapped {
     const spitedTextElems: string[] = this.splitByWhiteSpaces();
     return spitedTextElems
       .map(function (val, index) {
-        const unWrappedText = TextToWrapped.create(val);
+        const unWrappedText = TextToWrap.create(val);
         return unWrappedText.wrapByNumCharsPerLine(numCharsPerLine);
       })
       .join("\n");
