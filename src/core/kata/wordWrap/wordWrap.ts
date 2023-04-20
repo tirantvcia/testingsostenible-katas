@@ -1,88 +1,68 @@
-export function wordWrap(texto: string, numeroCaracteresLinea: number) {
-  return wordWrapNoPrimitive(
-    Cadena.crear(texto),
-    NumeroCaracteresLinea.crear(numeroCaracteresLinea)
+export function wordWrap(text: string, numCharsPerLine: number) {
+  const textToWrapped = TextToWrapped.create(text);
+  return textToWrapped.wrap(
+    NumCharsPerLine.create(numCharsPerLine)
   );
 }
 
-class NumeroCaracteresLinea {
-  private constructor(private readonly longitud: number) {}
-  static esLongitudLineaMenorQueCero(longitud: number) {
-    return longitud < 0;
+class NumCharsPerLine {
+  private constructor(private readonly numCharsPerLine: number) {}
+  static isNumCharsPerLineLessThanZero(numCharsPerLine: number) {
+    return numCharsPerLine < 0;
   }
 
-  static crear(longitud: number) {
-    if (NumeroCaracteresLinea.esLongitudLineaMenorQueCero(longitud)) {
+  static create(numCharsPerLine: number) {
+    if (NumCharsPerLine.isNumCharsPerLineLessThanZero(numCharsPerLine)) {
       throw new Error("Error longitud de tamaño linea");
     }
-    return new NumeroCaracteresLinea(longitud);
+    return new NumCharsPerLine(numCharsPerLine);
   }
 
-  valor() {
-    return this.longitud;
+  value() {
+    return this.numCharsPerLine;
   }
 }
 
-class Cadena {
-  private constructor(private readonly texto: string) {}
-  static crear(texto: string) {
-    if (texto == null) {
-      return new Cadena("");
+class TextToWrapped {
+  private constructor(private readonly textToWrapped: string) {}
+  static create(textToWrapped: string) {
+    if (textToWrapped == null) {
+      return new TextToWrapped("");
     }
-    return new Cadena(texto);
+    return new TextToWrapped(textToWrapped);
   }
-  valor() {
-    return this.texto;
+  value() {
+    return this.textToWrapped;
   }
-  esLongitudCadenaMenorIgualQue(numeroCaracteresLinea: NumeroCaracteresLinea) {
-    return this.valor().length <= numeroCaracteresLinea.valor();
+  isLengthLessOrEqualsOf(numCharsPerLine: NumCharsPerLine) {
+    return this.value().length <= numCharsPerLine.value();
   }
-  partirCadenaPorEspaciosEnBlanco() {
-    return this.valor().split(" ");
+  splitByWhiteSpaces() {
+    return this.value().split(" ");
   }
-  partirPorIndices(posInicial: number, posFinal: number) {
-    return this.valor().substring(posInicial, posFinal) + "\n";
+  splitByPositions(posInicial: number, posFinal: number) {
+    return this.value().substring(posInicial, posFinal) + "\n";
   }
-  partirDesdeIndice(posInicial: number) {
-    return this.valor().substring(posInicial);
+  splitFromPosition(posInicial: number) {
+    return this.value().substring(posInicial);
   }
 
-  partirCadenaPorNumeroCaracteres(
-    numeroCaracteresLinea: NumeroCaracteresLinea
-  ) {
-    if (this.esLongitudCadenaMenorIgualQue(numeroCaracteresLinea)) {
-      return this.valor();
+  wrapByNumCharsPerLine(numCharsPerLine: NumCharsPerLine) {
+    if (this.isLengthLessOrEqualsOf(numCharsPerLine)) {
+      return this.value();
     }
-    const cadenaPartida = this.partirPorIndices(
-      0,
-      numeroCaracteresLinea.valor()
-    );
-    const restoSubCadena = Cadena.crear(
-      this.partirDesdeIndice(numeroCaracteresLinea.valor())
-    );
-    return cadenaPartida.concat(
-      restoSubCadena.partirCadenaPorNumeroCaracteres(numeroCaracteresLinea)
-    );
+    const wrappedText = this.splitByPositions(0,numCharsPerLine.value());
+    const unWrappedText = TextToWrapped.create(this.splitFromPosition(numCharsPerLine.value()));
+    return wrappedText.concat(unWrappedText.wrapByNumCharsPerLine(numCharsPerLine));
   }
-}
 
-function wordWrapNoPrimitive(
-  cadenaOriginal: Cadena,
-  numeroCaracteresLinea: NumeroCaracteresLinea
-) {
-  return partirCadena(cadenaOriginal, numeroCaracteresLinea);
-}
-
-function partirCadena(
-  cadenaOriginal: Cadena,
-  numeroCaracteresLinea: NumeroCaracteresLinea
-) {
-  const partesCadena: string[] =
-    cadenaOriginal.partirCadenaPorEspaciosEnBlanco();
-  return partesCadena
-    .map(function (val, index) {
-      const subCadena = Cadena.crear(val);
-      return subCadena.partirCadenaPorNumeroCaracteres(numeroCaracteresLinea);
-    })
-    .join("\n");
+  wrap(numCharsPerLine: NumCharsPerLine) {
+    const spitedTextElems: string[] = this.splitByWhiteSpaces();
+    return spitedTextElems
+      .map(function (val, index) {
+        const unWrappedText = TextToWrapped.create(val);
+        return unWrappedText.wrapByNumCharsPerLine(numCharsPerLine);
+      })
+      .join("\n");
+  }
 }
