@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1682023449195" clover="3.2.0">
-  <project timestamp="1682023449196" name="All files">
+<coverage generated="1682023656923" clover="3.2.0">
+  <project timestamp="1682023656923" name="All files">
     <metrics statements="27" coveredstatements="27" conditionals="3" coveredconditionals="3" methods="15" coveredmethods="15" elements="45" coveredelements="45" complexity="0" loc="27" ncloc="27" packages="1" files="1" classes="1"/>
     <file name="wordWrap.ts" path="/home/josepascual/workspace-testing/testing-library/src/core/kata/wordWrap/wordWrap.ts">
       <metrics statements="27" coveredstatements="27" conditionals="3" coveredconditionals="3" methods="15" coveredmethods="15"/>

@@ -41,7 +41,7 @@ class TextToWrapped {
     return this.value().split(" ");
   }
   splitByPositions(startPosition: number, endPosition: number) {
-    return this.value().substring(startPosition, endPosition) + "\n";
+    return this.value().substring(startPosition, endPosition);
   }
   splitFromPosition(startPosition: number) {
     return this.value().substring(startPosition);
@@ -51,7 +51,7 @@ class TextToWrapped {
     if (this.isLengthLessOrEqualsOf(numCharsPerLine)) {
       return this.value();
     }
-    const wrappedText = this.splitByPositions(0,numCharsPerLine.value());
+    const wrappedText = this.splitByPositions(0,numCharsPerLine.value()) + "\n";
     const unWrappedText = TextToWrapped.create(this.splitFromPosition(numCharsPerLine.value()));
     return wrappedText.concat(unWrappedText.wrapByNumCharsPerLine(numCharsPerLine));
   }
