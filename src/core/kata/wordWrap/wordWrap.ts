@@ -1,8 +1,3 @@
-export function wordWrap(text: string, numCharsPerLine: number) {
-  const textToWrap = TextToWrap.create(text);
-  return textToWrap.wrap(NumCharsPerLine.create(numCharsPerLine));
-}
-
 export class NumCharsPerLine {
   private constructor(private readonly numCharsPerLine: number) {}
   static isNumCharsPerLineLessThanZero(numCharsPerLine: number) {
