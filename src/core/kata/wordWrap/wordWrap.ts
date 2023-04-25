@@ -1,11 +1,9 @@
 export function wordWrap(text: string, numCharsPerLine: number) {
   const textToWrap = TextToWrap.create(text);
-  return textToWrap.wrap(
-    NumCharsPerLine.create(numCharsPerLine)
-  );
+  return textToWrap.wrap(NumCharsPerLine.create(numCharsPerLine));
 }
 
-class NumCharsPerLine {
+export class NumCharsPerLine {
   private constructor(private readonly numCharsPerLine: number) {}
   static isNumCharsPerLineLessThanZero(numCharsPerLine: number) {
     return numCharsPerLine < 0;
@@ -23,7 +21,7 @@ class NumCharsPerLine {
   }
 }
 
-class TextToWrap {
+export class TextToWrap {
   private constructor(private readonly textToWrapped: string) {}
   static create(textToWrap: string) {
     if (textToWrap == null) {
@@ -34,26 +32,31 @@ class TextToWrap {
   value() {
     return this.textToWrapped;
   }
-  isLengthLessOrEqualsOf(numCharsPerLine: NumCharsPerLine) {
+  private isLengthLessOrEqualsOf(numCharsPerLine: NumCharsPerLine) {
     return this.value().length <= numCharsPerLine.value();
   }
-  splitByWhiteSpaces() {
+  private splitByWhiteSpaces() {
     return this.value().split(" ");
   }
-  splitByPositions(startPosition: number, endPosition: number) {
+  private splitByPositions(startPosition: number, endPosition: number) {
     return this.value().substring(startPosition, endPosition);
   }
-  splitFromPosition(startPosition: number) {
+  private splitFromPosition(startPosition: number) {
     return this.value().substring(startPosition);
   }
 
-  wrapByNumCharsPerLine(numCharsPerLine: NumCharsPerLine) {
+  private wrapByNumCharsPerLine(numCharsPerLine: NumCharsPerLine) {
     if (this.isLengthLessOrEqualsOf(numCharsPerLine)) {
       return this.value();
     }
-    const wrappedText = this.splitByPositions(0,numCharsPerLine.value()) + "\n";
-    const unWrappedText = TextToWrap.create(this.splitFromPosition(numCharsPerLine.value()));
-    return wrappedText.concat(unWrappedText.wrapByNumCharsPerLine(numCharsPerLine));
+    const wrappedText =
+      this.splitByPositions(0, numCharsPerLine.value()) + "\n";
+    const unWrappedText = TextToWrap.create(
+      this.splitFromPosition(numCharsPerLine.value())
+    );
+    return wrappedText.concat(
+      unWrappedText.wrapByNumCharsPerLine(numCharsPerLine)
+    );
   }
 
   wrap(numCharsPerLine: NumCharsPerLine) {
