@@ -56,11 +56,13 @@ export class TextToWrap {
 
   wrap(numCharsPerLine: NumCharsPerLine) {
     const spitedTextElems: string[] = this.splitByWhiteSpaces();
-    return spitedTextElems
+    const wrappedText = spitedTextElems
       .map(function (val, index) {
         const unWrappedText = TextToWrap.create(val);
         return unWrappedText.wrapByNumCharsPerLine(numCharsPerLine);
       })
       .join("\n");
+
+    return TextToWrap.create(wrappedText);
   }
 }
