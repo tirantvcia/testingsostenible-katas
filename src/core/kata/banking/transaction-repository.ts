@@ -8,7 +8,10 @@ export class TransactionRepository {
     const transaction = new Transaction(this.clock.todayAsString(), amount);
     this.transactions.push(transaction);
   }
-  addWithdrawal(amount: number) {}
+  addWithdrawal(amount: number) {
+    const transaction = new Transaction(this.clock.todayAsString(), -amount);
+    this.transactions.push(transaction);
+  }
   allTransactions() {
     return this.transactions;
   }
