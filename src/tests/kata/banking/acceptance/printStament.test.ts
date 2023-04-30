@@ -1,5 +1,6 @@
 import { Console } from "../../../../core/kata/banking/console";
 import { Account } from "../../../../core/kata/banking/account";
+import { TransactionRepository } from "../../../../core/kata/banking/transaction-repository";
 /*
 Nuestra aplicación debe permitir:
     Hacer un depósito en la cuenta
@@ -16,7 +17,8 @@ Date       | Amount | Balance
 describe("Print Stament", () => {
   const console = new Console();
   let consoleSpy = jest.spyOn(console, "log");
-  const account = new Account();
+  let repository = new TransactionRepository();
+  const account = new Account(repository);
 
   it("imprime el estado de la cuenta con sus transacciones por consola", () => {});
   account.deposit(1000.0);
