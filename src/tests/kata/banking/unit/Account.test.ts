@@ -1,10 +1,8 @@
+import { Transaction } from "../../../../core/kata/banking/Transaction";
+import { StatementPrinter } from "../../../../core/kata/banking/StatementPrinter";
 import { Account } from "../../../../core/kata/banking/account";
 import { TransactionRepository } from "../../../../core/kata/banking/transaction-repository";
 
-export class Transaction {}
-export class StatementPrinter {
-  print(transacionts: Transaction[]) {}
-}
 describe("The Account", () => {
   let repository = new TransactionRepository();
   let statementPrinter = new StatementPrinter();

@@ -1,5 +1,6 @@
 import { TransactionRepository } from "./transaction-repository";
-import { StatementPrinter } from "../../../tests/kata/banking/unit/Account.test";
+import { StatementPrinter } from "./StatementPrinter";
+
 export class Account {
   constructor(
     private repository: TransactionRepository,
