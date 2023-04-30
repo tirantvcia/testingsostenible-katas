@@ -1,3 +1,5 @@
+import { Console } from "../../../../core/kata/banking/console";
+import { Account } from "../../../../core/kata/banking/account";
 /*
 Nuestra aplicación debe permitir:
     Hacer un depósito en la cuenta
@@ -10,18 +12,6 @@ Date       | Amount | Balance
 13/01/2022 | -500.00   | 500.00
 10/01/2022 | 1000.00   | 1000.00
 */
-
-class Console {
-  log(message: string) {
-    console.log(message);
-  }
-}
-
-class Account {
-  deposit(quantity: number) {}
-  withdraw(quantity: number) {}
-  printStatement() {}
-}
 
 describe("Print Stament", () => {
   const console = new Console();
