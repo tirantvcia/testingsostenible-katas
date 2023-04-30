@@ -4,6 +4,8 @@ export class Account {
   deposit(quantity: number) {
     this.repository.addDeposit(quantity);
   }
-  withdraw(quantity: number) {}
+  withdraw(quantity: number) {
+    this.repository.addWithdrawal(quantity);
+  }
   printStatement() {}
 }
