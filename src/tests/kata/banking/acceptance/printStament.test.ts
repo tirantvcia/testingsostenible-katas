@@ -2,6 +2,7 @@ import { Console } from "../../../../core/kata/banking/console";
 import { Account } from "../../../../core/kata/banking/account";
 import { TransactionRepository } from "../../../../core/kata/banking/transaction-repository";
 import { StatementPrinter } from "../../../../core/kata/banking/StatementPrinter";
+import { Clock } from "../../../../core/kata/banking/Clock";
 /*
 Nuestra aplicación debe permitir:
     Hacer un depósito en la cuenta
@@ -18,7 +19,7 @@ Date       | Amount | Balance
 describe("Print Stament", () => {
   const console = new Console();
   let consoleSpy = jest.spyOn(console, "log");
-  let repository = new TransactionRepository();
+  let repository = new TransactionRepository(new Clock());
   let statementPrinter = new StatementPrinter();
   const account = new Account(repository, statementPrinter);
 

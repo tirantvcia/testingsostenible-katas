@@ -2,9 +2,10 @@ import { Transaction } from "../../../../core/kata/banking/Transaction";
 import { StatementPrinter } from "../../../../core/kata/banking/StatementPrinter";
 import { Account } from "../../../../core/kata/banking/account";
 import { TransactionRepository } from "../../../../core/kata/banking/transaction-repository";
+import { Clock } from "../../../../core/kata/banking/Clock";
 
 describe("The Account", () => {
-  let repository = new TransactionRepository();
+  let repository = new TransactionRepository(new Clock());
   let statementPrinter = new StatementPrinter();
   let account = new Account(repository, statementPrinter);
   let addDepositSpy = jest.spyOn(repository, "addDeposit");
@@ -21,7 +22,15 @@ describe("The Account", () => {
     expect(addWithdrawalSpy).toHaveBeenCalledWith(500);
   });
   it("imprime las transacciones a través del impresion de estado", () => {
-    const transactions = [new Transaction(), new Transaction()];
+    const today = "25/03/2022";
+    const clock = new Clock();
+    clock.todayAsString = () => today;
+    const amount = 100;
+
+    const transactions = [
+      new Transaction(today, amount),
+      new Transaction(today, amount),
+    ];
     repository.allTransactions = () => transactions;
     account.printStatement();
     expect(printStamentSpy).toHaveBeenCalledWith(transactions);
