@@ -7,10 +7,11 @@ export class StatementPrinter {
 }
 describe("The Account", () => {
   let repository = new TransactionRepository();
-  let account = new Account(repository);
+  let statementPrinter = new StatementPrinter();
+  let account = new Account(repository, statementPrinter);
   let addDepositSpy = jest.spyOn(repository, "addDeposit");
   let addWithdrawalSpy = jest.spyOn(repository, "addWithdrawal");
-  let statementPrinter = new StatementPrinter();
+
   let printStamentSpy = jest.spyOn(statementPrinter, "print");
 
   it("guarda una transaccion deposito a través del repositorio", () => {
