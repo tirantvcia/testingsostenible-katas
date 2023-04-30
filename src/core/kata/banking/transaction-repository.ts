@@ -9,6 +9,6 @@ export class TransactionRepository {
   }
   addWithdrawal(amount: number) {}
   allTransactions() {
-    return [];
+    return this.transactions;
   }
 }
