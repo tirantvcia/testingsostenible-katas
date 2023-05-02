@@ -3,10 +3,12 @@ import { StatementPrinter } from "../../../../core/kata/banking/StatementPrinter
 import { Account } from "../../../../core/kata/banking/account";
 import { TransactionRepository } from "../../../../core/kata/banking/transaction-repository";
 import { Clock } from "../../../../core/kata/banking/Clock";
+import { Console } from "../../../../core/kata/banking/console";
 
 describe("The Account", () => {
+  let console = new Console();
   let repository = new TransactionRepository(new Clock());
-  let statementPrinter = new StatementPrinter();
+  let statementPrinter = new StatementPrinter(console);
   let account = new Account(repository, statementPrinter);
   let addDepositSpy = jest.spyOn(repository, "addDeposit");
   let addWithdrawalSpy = jest.spyOn(repository, "addWithdrawal");
