@@ -1,3 +1,8 @@
 export class Transaction {
-  constructor(private readonly date: string, private readonly amount: number) {}
+  public date: string;
+  public amount: number;
+  constructor(date: string, amount: number) {
+    this.date = date;
+    this.amount = amount;
+  }
 }
