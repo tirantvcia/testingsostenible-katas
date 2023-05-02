@@ -5,16 +5,7 @@ export class StatementPrinter {
   private readonly header = "Date       | Amount    | Balance";
   print(transactions: Transaction[]) {
     this.console.log(this.header);
-    let runningBalance = 0;
-    transactions
-      .map((transaction) => {
-        runningBalance += transaction.amount;
-        return this.formatStatementLine(transaction, runningBalance);
-      })
-      .reverse()
-      .forEach((line) => {
-        this.console.log(line);
-      });
+    this.printStatements(transactions);
   }
 
   private formatStatementLine(
@@ -25,5 +16,20 @@ export class StatementPrinter {
     const formattedBalance = runningBalance.toFixed(2);
 
     return `${transaction.date} | ${formattedAmount}   | ${formattedBalance}`;
+  }
+
+  private printStatements(transactions: Transaction[]) {
+    this.generateStatementLines(transactions)
+      .reverse()
+      .forEach((line) => {
+        this.console.log(line);
+      });
+  }
+  private generateStatementLines(transactions: Transaction[]) {
+    let runningBalance = 0;
+    return transactions.map((transaction) => {
+      runningBalance += transaction.amount;
+      return this.formatStatementLine(transaction, runningBalance);
+    });
   }
 }
