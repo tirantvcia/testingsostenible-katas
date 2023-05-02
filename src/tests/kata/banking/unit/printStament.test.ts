@@ -3,7 +3,7 @@ import { StatementPrinter } from "../../../../core/kata/banking/StatementPrinter
 import { Transaction } from "../../../../core/kata/banking/Transaction";
 describe("The printStatement", () => {
   const console = new Console();
-  let consoleSpy = jest.spyOn(Console, "log");
+  let consoleSpy = jest.spyOn(console, "log");
   let statementPrinter = new StatementPrinter(console);
   it("siempre imprime la cabecera a través de la consola", () => {
     let transactions: Transaction[] = [];
