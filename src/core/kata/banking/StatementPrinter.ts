@@ -9,7 +9,7 @@ export class StatementPrinter {
     if (transactions.length > 0) {
       const transaction = transactions[0];
       runningBalance += transaction.amount;
-      this.formatStatementLine(transaction, runningBalance);
+      this.console.log(this.formatStatementLine(transaction, runningBalance));
     }
   }
 
@@ -19,8 +19,7 @@ export class StatementPrinter {
   ) {
     const formattedAmount = transaction.amount.toFixed(2);
     const formattedBalance = runningBalance.toFixed(2);
-    this.console.log(
-      `${transaction.date} | ${formattedAmount}   | ${formattedBalance}`
-    );
+
+    return `${transaction.date} | ${formattedAmount}   | ${formattedBalance}`;
   }
 }
