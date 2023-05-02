@@ -6,11 +6,15 @@ export class StatementPrinter {
   print(transactions: Transaction[]) {
     this.console.log(this.header);
     let runningBalance = 0;
-    if (transactions.length > 0) {
-      const transaction = transactions[0];
-      runningBalance += transaction.amount;
-      this.console.log(this.formatStatementLine(transaction, runningBalance));
-    }
+    transactions
+      .map((transaction) => {
+        runningBalance += transaction.amount;
+        return this.formatStatementLine(transaction, runningBalance);
+      })
+      .reverse()
+      .forEach((line) => {
+        this.console.log(line);
+      });
   }
 
   private formatStatementLine(
