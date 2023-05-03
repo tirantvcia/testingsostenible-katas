@@ -19,17 +19,25 @@ Date       | Amount | Balance
 describe("Print Stament", () => {
   const console = new Console();
   let consoleSpy = jest.spyOn(console, "log");
-  let repository = new TransactionRepository(new Clock());
+  const clock = new Clock();
+  clock.todayAsString = jest
+    .fn()
+    .mockReturnValueOnce("10/01/2022")
+    .mockReturnValueOnce("13/01/2022")
+    .mockReturnValueOnce("14/01/2022");
+
+  let repository = new TransactionRepository(clock);
   let statementPrinter = new StatementPrinter(console);
   const account = new Account(repository, statementPrinter);
 
-  it("imprime el estado de la cuenta con sus transacciones por consola", () => {});
-  account.deposit(1000.0);
-  account.withdraw(500.0);
-  account.deposit(2000.0);
-  account.printStatement();
-  expect(consoleSpy).toHaveBeenCalledWith("Date       | Amount    | Balance");
-  expect(consoleSpy).toHaveBeenCalledWith("14/01/2022 | 2000.00   | 2500.00");
-  expect(consoleSpy).toHaveBeenCalledWith("13/01/2022 | -500.00   | 500.00");
-  expect(consoleSpy).toHaveBeenCalledWith("10/01/2022 | 1000.00   | 1000.00");
+  it("imprime el estado de la cuenta con sus transacciones por consola", () => {
+    account.deposit(1000.0);
+    account.withdraw(500.0);
+    account.deposit(2000.0);
+    account.printStatement();
+    expect(consoleSpy).toHaveBeenCalledWith("Date       | Amount    | Balance");
+    expect(consoleSpy).toHaveBeenCalledWith("14/01/2022 | 2000.00   | 2500.00");
+    expect(consoleSpy).toHaveBeenCalledWith("13/01/2022 | -500.00   | 500.00");
+    expect(consoleSpy).toHaveBeenCalledWith("10/01/2022 | 1000.00   | 1000.00");
+  });
 });
